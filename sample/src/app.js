@@ -1,14 +1,10 @@
-var express                   = require("express"),
-    RequestPromiseInterceptor = require("request-promise-interceptor");
+var express                           = require("express"),
+    RequestPromiseMiddlewareFramework = require("request-promise-middleware-framework");
 
-var interceptors = [ require("./testinterceptor.js")(1), require("./testinterceptor.js")(2) ];
-var requestPromiseInterceptor = new RequestPromiseInterceptor(require("request-promise"), interceptors);
-var rp = requestPromiseInterceptor.getInterceptedRequestPromise();
+var middleware = [ require("./testmiddleware.js")(1), require("./testmiddleware.js")(2) ];
+var rpMiddlewareFramework = new RequestPromiseMiddlewareFramework(require("request-promise"), middleware);
+var rp = rpMiddlewareFramework.getMiddlewareEnabledRequestPromise();
 var app = express();
-
-app.get("/", function(req, res) {
-  res.send("Hello World!");
-});
 
 app.get("/echo", function(req, res) {
   if (req.query.message) {
