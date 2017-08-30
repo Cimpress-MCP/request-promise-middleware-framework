@@ -1,12 +1,12 @@
-const _assign = require("lodash.assign"),
-    _toArray = require("lodash.toarray"),
-    _forEach = require("lodash.foreach"),
-    _concat = require("lodash.concat"),
-    _get = require("lodash.get"),
-    assert  = require("assert-plus"),
-    Promise = require("bluebird");
+var assign   = require("lodash.assign"),
+    concat   = require("lodash.concat"),
+    forEach  = require("lodash.foreach"),
+    get      = require("lodash.get"),
+    toArray  = require("lodash.toarray"),
+    assert   = require("assert-plus"),
+    Promise  = require("bluebird");
 
-const RequestPromiseMiddlewareFramework = function(rp) {
+var RequestPromiseMiddlewareFramework = function(rp) {
   if (!(this instanceof RequestPromiseMiddlewareFramework)) {
     return new RequestPromiseMiddlewareFramework(rp);
   }
@@ -15,7 +15,7 @@ const RequestPromiseMiddlewareFramework = function(rp) {
   this.rp = rp;
 
   this.initialMiddleware = function(options, callback) {
-    rp(_assign(options, { resolveWithFullResponse: true }))
+    rp(assign(options, { resolveWithFullResponse: true }))
       .then(response => callback(null, response, response.body))
       .catch(err => callback(err, null, null));
   };
@@ -23,24 +23,24 @@ const RequestPromiseMiddlewareFramework = function(rp) {
   this.middleware = [ ];
 
   if (arguments.length > 1) {
-    var args = _toArray(arguments);
+    var args = toArray(arguments);
     args.shift();
-    _forEach(args, mw => this.use(mw));
+    forEach(args, mw => this.use(mw));
   }
 };
 
 RequestPromiseMiddlewareFramework.prototype.use = function(middleware) {
-  this.middleware = _concat(this.middleware, middleware);
+  this.middleware = concat(this.middleware, middleware);
 };
 
 RequestPromiseMiddlewareFramework.prototype.getMiddlewareEnabledRequestPromise = function() {
   var me = this;
   var intercept = function(options) {
-    var resolveWithFullResponse = _get(options, "resolveWithFullResponse");
-    var middleware = _concat(me.middleware, me.initialMiddleware);
-    var next = function(__options, __callback) {
+    var resolveWithFullResponse = get(options, "resolveWithFullResponse");
+    var middleware = concat(me.middleware, me.initialMiddleware);
+    var next = function(_options, _callback) {
       var nextMiddleware = middleware.shift();
-      nextMiddleware(__options, __callback, next);
+      nextMiddleware(_options, _callback, next);
     };
     var promisifiedNext = Promise.promisify(next);
     return promisifiedNext(options)
