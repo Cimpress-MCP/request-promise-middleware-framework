@@ -1,10 +1,10 @@
-var assign   = require("lodash.assign"),
-    concat   = require("lodash.concat"),
-    forEach  = require("lodash.foreach"),
-    get      = require("lodash.get"),
-    toArray  = require("lodash.toarray"),
-    assert   = require("assert-plus"),
-    Promise  = require("bluebird");
+var assert  = require("assert-plus"),
+    assign  = require("lodash.assign"),
+    concat  = require("lodash.concat"),
+    forEach = require("lodash.foreach"),
+    get     = require("lodash.get"),
+    Promise = require("bluebird"),
+    toArray = require("lodash.toarray");
 
 var RequestPromiseMiddlewareFramework = function(rp) {
   if (!(this instanceof RequestPromiseMiddlewareFramework)) {
