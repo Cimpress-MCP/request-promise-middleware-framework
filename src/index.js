@@ -1,6 +1,10 @@
-var _       = require("lodash"),
-    assert  = require("assert-plus"),
-    Promise = require("bluebird");
+var assert  = require("assert-plus"),
+    assign  = require("lodash.assign"),
+    concat  = require("lodash.concat"),
+    forEach = require("lodash.foreach"),
+    get     = require("lodash.get"),
+    Promise = require("bluebird"),
+    toArray = require("lodash.toarray");
 
 var RequestPromiseMiddlewareFramework = function(rp) {
   if (!(this instanceof RequestPromiseMiddlewareFramework)) {
@@ -11,7 +15,7 @@ var RequestPromiseMiddlewareFramework = function(rp) {
   this.rp = rp;
 
   this.initialMiddleware = function(options, callback) {
-    rp(_.assign(options, { resolveWithFullResponse: true }))
+    rp(assign(options, { resolveWithFullResponse: true }))
       .then(response => callback(null, response, response.body))
       .catch(err => callback(err, null, null));
   };
@@ -19,21 +23,21 @@ var RequestPromiseMiddlewareFramework = function(rp) {
   this.middleware = [ ];
 
   if (arguments.length > 1) {
-    var args = _.toArray(arguments);
+    var args = toArray(arguments);
     args.shift();
-    _.forEach(args, mw => this.use(mw));
+    forEach(args, mw => this.use(mw));
   }
 };
 
 RequestPromiseMiddlewareFramework.prototype.use = function(middleware) {
-  this.middleware = _.concat(this.middleware, middleware);
+  this.middleware = concat(this.middleware, middleware);
 };
 
 RequestPromiseMiddlewareFramework.prototype.getMiddlewareEnabledRequestPromise = function() {
   var me = this;
   var intercept = function(options) {
-    var resolveWithFullResponse = _.get(options, "resolveWithFullResponse");
-    var middleware = _.concat(me.middleware, me.initialMiddleware);
+    var resolveWithFullResponse = get(options, "resolveWithFullResponse");
+    var middleware = concat(me.middleware, me.initialMiddleware);
     var next = function(_options, _callback) {
       var nextMiddleware = middleware.shift();
       nextMiddleware(_options, _callback, next);
