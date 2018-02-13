@@ -60,6 +60,19 @@ describe("RequestPromiseMiddlewareFramework", function() {
     it("should execute the middleware appropriately before and after the request is made", function() {
       delete context.options.resolveWithFullResponse;
       return context.rp(context.options)
+        .then(request => {
+          expect(request.body).to.exist.and.equal(context.responseBody);
+          expect(context.mockedRequestPromise.defaults).to.have.been.called();
+          expect(context.overriddenRequest).to.have.been.called();
+          expect(context.middleware).to.have.been.called();
+          expect(context.mockedRequestPromise).to.have.been.called();
+          expect(context.middlewareCallback).to.have.been.called();
+        });
+    });
+
+    it("should allow you to just get a body", function() {
+      context.options.resolveWithFullResponse = false;
+      return context.rp(context.options)
         .then(body => {
           expect(body).to.exist.and.equal(context.responseBody);
           expect(context.mockedRequestPromise.defaults).to.have.been.called();

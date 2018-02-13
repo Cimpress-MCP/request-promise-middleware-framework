@@ -35,6 +35,9 @@ function(options, callback, next) {
 }
 ```
 
+## resolveWithFullResponse
+While the middleware does attempt to leave request-promise as pristine as possible, the parameter ```resolveWithFullResponse``` makes that difficult.  Many of the components of a pipeline may need access to the full response, and any part of the pipeline that hides the possible data is frowned upon.  Therefore, the middleware framework must deal with that as a special case.  As in request-promise, this can be configured on the invocation of request-promise, however the pipeline itself will not respect any further configuration of the parameter.  The only difference you will experience between this and normal request-promise is that the default for this parameter is true.  At invocation of request-promise, you can still set this to false.
+
 ## Examples
 
 Once you've defined your middleware, you can simply register it by creating a new framework object, and then getting the request object:
