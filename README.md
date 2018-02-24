@@ -50,6 +50,14 @@ You can then use returned ``rp`` object just like you normally would.
 
 For a full example inside an express app, see the [sample](sample) directory within this repository.
 
-## License
+# License
 
 [MIT](LICENSE)
+
+# Change Log
+## 1.0
+- Made resolveWithFullResponse the default
+
+## 1.1
+- ES6 syntax
+

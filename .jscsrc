@@ -20,7 +20,6 @@
   "disallowSpacesInsideParentheses": true,
   "disallowTabs": true,
   "disallowTrailingComma": true,
-  "disallowTrailingWhitespace": true,
   "maximumLineLength": 120,
   "requireBlocksOnNewline": true,
   "requireCamelCaseOrUpperCaseIdentifiers": true,
