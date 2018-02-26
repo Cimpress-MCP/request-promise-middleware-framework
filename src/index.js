@@ -15,7 +15,7 @@ var RequestPromiseMiddlewareFramework = function(rp) {
   this.rp = rp;
 
   this.initialMiddleware = function(options, callback) {
-    rp(assign(options, { resolveWithFullResponse: true }))
+    return Promise.resolve(rp(assign(options, { resolveWithFullResponse: true })))
       .then(response => callback(null, response, response.body))
       .catch(err => callback(err, null, null));
   };
