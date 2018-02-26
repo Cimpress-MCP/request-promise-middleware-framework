@@ -31,7 +31,7 @@ class RequestPromiseMiddlewareFramework {
 
   /**
    * The middleware that passes the request through to the next request-promise instance
-   * @param {object} options - the requst-promise options 
+   * @param {object} options - the request-promise options
    * @param {function} callback - the function to call after the middleware has executed
    */
   initialMiddleware(options, callback) {
@@ -41,13 +41,11 @@ class RequestPromiseMiddlewareFramework {
     // this inconsistency makes it looks like the promise is "dangling",
     // but wrapping it in a promise makes the interface consistent.
     return P.resolve(this.rp(assign(options, { resolveWithFullResponse: true })))
-      .then(response => {
-        callback(null, response, response.body);
-      })
+      .then(response => allback(null, response, response.body))
       .catch(err => callback(err, null, null));
   }
 
-  /** 
+  /**
    * Attaches the current middleware list to the request promise, and returns
    * the modified request-promise instance
   */
