@@ -58,4 +58,6 @@ For a full example inside an express app, see the [sample](sample) directory wit
 ## 1.0
 - Made resolveWithFullResponse the default
 
+## 2.0
+- ES6 syntax, dropping node 5 support.
 

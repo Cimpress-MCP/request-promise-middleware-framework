@@ -1,7 +1,6 @@
 language: node_js
 node_js:
 - '6'
-- '5'
 script:
 - grunt
 deploy:
@@ -12,5 +11,5 @@ deploy:
   on:
     tags: true
     branch: master
-    node: '5'
+    node: '6'
     repo: Cimpress-MCP/request-promise-middleware-framework
