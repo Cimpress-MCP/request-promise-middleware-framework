@@ -41,7 +41,7 @@ class RequestPromiseMiddlewareFramework {
     // this inconsistency makes it looks like the promise is "dangling",
     // but wrapping it in a promise makes the interface consistent.
     return P.resolve(this.rp(assign(options, { resolveWithFullResponse: true })))
-      .then(response => allback(null, response, response.body))
+      .then(response => callback(null, response, response.body))
       .catch(err => callback(err, null, null));
   }
 
