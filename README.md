@@ -16,10 +16,10 @@ function(options, callback, next) {
 }
 ```
 
-The ``next()`` call will call the next middleware in the chain. To add any logic on the response, you can modify the callback as follows:
+The `next()` call will call the next middleware in the chain. To add any logic on the response, you can modify the callback as follows:
 ```
 function(options, callback, next) {
-  var _callback = function(err, response, body) {
+  const _callback = (err, response, body) => {
     // Add custom response logic here.
     callback(err, response, body);
   };
@@ -30,34 +30,50 @@ function(options, callback, next) {
 If instead you want to completely short-circuit the HTTP call, you can simply call the callback and provide your own error or response:
 ```
 function(options, callback, next) {
-  var body = "Everything's fine."
+  const body = "Everything's fine."
   callback(null, { statusCode: 200, body: body }, body);
 }
 ```
 
-## resolveWithFullResponse
-While the middleware does attempt to leave request-promise as pristine as possible, the parameter ```resolveWithFullResponse``` makes that difficult.  Many of the components of a pipeline may need access to the full response, and any part of the pipeline that hides the possible data is frowned upon.  Therefore, the middleware framework must deal with that as a special case.  As in request-promise, this can be configured on the invocation of request-promise, however the pipeline itself will not respect any further configuration of the parameter.  The only difference you will experience between this and normal request-promise is that the default for this parameter is true.  At invocation of request-promise, you can still set this to false.
+## Using `resolveWithFullResponse`
+While the middleware does attempt to leave request-promise as pristine as possible, the parameter `resolveWithFullResponse` makes that difficult.  Many of the components of a pipeline may need access to the full response, and any part of the pipeline that hides the possible data is frowned upon.  Therefore, the middleware framework must deal with that as a special case.  As in request-promise, this can be configured on the invocation of request-promise, however the pipeline itself will not respect any further configuration of the parameter.  The only difference you will experience between this and normal request-promise is that the default for this parameter is true.  At invocation of request-promise, you can still set this to false.
 
 ## Examples
 
-Once you've defined your middleware, you can simply register it by creating a new framework object, and then getting the request object:
+Once you've defined your middleware, you can simply register it by creating a new framework object, and then getting the request object. If you want to use native Promises, you can do so as follows:
 ```
-var rpMiddlewareFramework = new RequestPromiseMiddlewareFramework(require("request-promise"), middleware);
-var rp = rpMiddlewareFramework.getMiddlewareEnabledRequestPromise();
+const rpMiddlewareFramework = new RequestPromiseMiddlewareFramework({ rp: require("request-promise") }, middleware);
+const rp = rpMiddlewareFramework.getMiddlewareEnabledRequestPromise();
 ```
 
-You can then use returned ``rp`` object just like you normally would.
+Or, if you want to use an alternate Promise library such as bluebird, you can do so as follows:
+
+```
+const bluebirdPromise = require("bluebird");
+const rpMiddlewareFramework = new RequestPromiseMiddlewareFramework({ rp: require("request-promise"), P: bluebirdPromise }, middleware);
+const rp = rpMiddlewareFramework.getMiddlewareEnabledRequestPromise();
+```
+
+In either case, you can then use returned ``rp`` object just like you normally would.
 
 For a full example inside an express app, see the [sample](sample) directory within this repository.
+
+## API Documentation
+
+Go [here](apidoc.md) for the latest API documentation.
 
 # License
 
 [MIT](LICENSE)
 
 # Change Log
-## 1.0
-- Made resolveWithFullResponse the default
+## 3.0
+- Dropping support for Node.js 6.
+- Adding support for Node.js 8, 10 and 11.
+- Adding support for specifying an alternate Promise library such as bluebird (by default it will use native Promises).
 
 ## 2.0
-- ES6 syntax, dropping node 5 support.
+- ES6 syntax, dropping Node.js 5 support.
 
+## 1.0
+- Made resolveWithFullResponse the default
