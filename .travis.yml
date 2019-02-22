@@ -1,8 +1,10 @@
 language: node_js
 node_js:
-- '6'
+- '8'
+- '10'
+- '11'
 script:
-- grunt
+- npm test
 deploy:
   provider: npm
   email: mcp_infrastructure@cimpress.com
@@ -11,5 +13,5 @@ deploy:
   on:
     tags: true
     branch: master
-    node: '6'
+    node: '10'
     repo: Cimpress-MCP/request-promise-middleware-framework

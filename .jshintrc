@@ -1,6 +1,0 @@
-{
-  "expr": true,
-  "esversion": 6,
-  "futurehostile": true,
-  "predef": [ "-Promise" ]
-}
