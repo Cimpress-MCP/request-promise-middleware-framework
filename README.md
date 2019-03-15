@@ -50,7 +50,7 @@ Or, if you want to use an alternate Promise library such as bluebird, you can do
 
 ```
 const bluebirdPromise = require("bluebird");
-const rpMiddlewareFramework = new RequestPromiseMiddlewareFramework({ rp: require("request-promise"), P: bluebirdPromise }, middleware);
+const rpMiddlewareFramework = new RequestPromiseMiddlewareFramework({ rp: require("request-promise"), PromiseDependency: bluebirdPromise }, middleware);
 const rp = rpMiddlewareFramework.getMiddlewareEnabledRequestPromise();
 ```
 
@@ -65,15 +65,3 @@ Go [here](apidoc.md) for the latest API documentation.
 # License
 
 [MIT](LICENSE)
-
-# Change Log
-## 3.0
-- Dropping support for Node.js 6.
-- Adding support for Node.js 8, 10 and 11.
-- Adding support for specifying an alternate Promise library such as bluebird (by default it will use native Promises).
-
-## 2.0
-- ES6 syntax, dropping Node.js 5 support.
-
-## 1.0
-- Made resolveWithFullResponse the default
