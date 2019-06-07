@@ -30,17 +30,17 @@
     "lodash.toarray": "^4.4.0"
   },
   "devDependencies": {
-    "bluebird": "^3.5.3",
+    "bluebird": "^3.5.5",
     "chai": "^4.2.0",
     "chai-spies": "^1.0.0",
-    "depcheck": "^0.7.2",
-    "eslint": "^5.15.2",
-    "eslint-config-prettier": "^4.1.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "jsdoc-to-markdown": "^4.0.1",
-    "mocha": "^6.0.2",
-    "nyc": "^13.3.0",
-    "prettier": "^1.16.4",
+    "depcheck": "^0.8.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "jsdoc-to-markdown": "^5.0.0",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "prettier": "^1.17.1",
     "uuid": "^3.3.2"
   },
   "nyc": {
