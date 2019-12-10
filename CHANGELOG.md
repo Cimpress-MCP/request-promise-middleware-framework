@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.6] - 2019-12-10
+### Fixed
+- Fixed security vulnerabilities.
+
 ## [3.0] - 2019-03-15
 ### Fixed
 - Fixing README to accurately specify the constructor parameters.

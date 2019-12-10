@@ -1,8 +1,8 @@
 language: node_js
 node_js:
-- '8'
 - '10'
-- '11'
+- '12'
+- '13'
 script:
 - npm test
 deploy:
@@ -13,5 +13,5 @@ deploy:
   on:
     tags: true
     branch: master
-    node: '10'
+    node: '12'
     repo: Cimpress-MCP/request-promise-middleware-framework
