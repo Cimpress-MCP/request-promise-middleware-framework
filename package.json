@@ -1,6 +1,6 @@
 {
   "name": "request-promise-middleware-framework",
-  "version": "3.0.4",
+  "version": "3.0.6",
   "description": "A framework to intercept HTTP calls made via the request-promise HTTP client.",
   "main": "src/index.js",
   "scripts": {
